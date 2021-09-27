@@ -3,7 +3,7 @@ import torch.nn as nn
 from config import max_char_len
 
 
-class BiDAF:
+class BiDAF(nn.Module):
     def __init__(
             self, clen, qlen,
             num_highway_layers=2,
@@ -34,6 +34,7 @@ class BiDAF:
         }
 
     def build_model(self):
-        word_embedding_layer = nn.Embedding(num_embeddings=self.word_vocab_size,
-                                            embedding_dim=self.emb_size)
-        word_embedding_layer.weight.data.copy_(torch.)
+        word_embedding_layer = nn.Embedding.from_pretrained(self.glove_weight)
+        char_embedding_layer = nn.Embedding(self.char_vocab_size, self.emb_size)
+        nn.init.uniform_(char_embedding_layer, -1.0, 1.0)
+        cinn_char = nn
